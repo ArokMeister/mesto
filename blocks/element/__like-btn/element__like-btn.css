@@ -1,0 +1,14 @@
+.element__like-btn {
+  min-height: 19px;
+  min-width: 22px;
+  background-image: url(../../../images/like_button_disable.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none;
+  background-color: #fff;
+}
+
+.element__like-btn:hover {
+  opacity: .6;
+  transition: .5s ease-in-out;
+}

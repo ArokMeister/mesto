@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./pages/index.css">
+  <title>Mesto</title>
+</head>
+<body class="page">
+  <header class="header">
+    <div class="header__container">
+      <img class="header__logo" src="./images/header__logo.svg" alt="Логотип Mesto Russia">
+    </div>
+  </header>
+  <main class="content">
+    <section class="profile">
+      <img class="profile__avatar" src="./images/avatar.png" alt="Аватар пользователя">
+      <div class="profile__info">
+        <h1 class="profile__name">Жак-Ив Кусто</h1>
+        <button class="profile__edit-btn"></button>
+        <p class="profile__profession">Исследователь океана</p>
+      </div>
+      <button class="profile__add-btn"></button>
+    </section>
+    <section class="elements">
+      <ul class="elements__list">
+        <li>
+          <article class="element">
+            <img class="element__image" src="./images/avrorina_skala.jpg" alt="Замок на Аврориной скале в Крыму">
+            <div class="element__description">
+              <h2 class="element__title">Крым</h2>
+              <button class="element__like-btn"></button>
+            </div>
+          </article>
+        </li>
+        <li>
+          <article class="element">
+            <img class="element__image" src="./images/kazan.jpg" alt="Дворец земледельцев в Казани">
+            <div class="element__description">
+              <h2 class="element__title">Казань</h2>
+              <button class="element__like-btn"></button>
+            </div>
+          </article>
+        </li>
+        <li>
+          <article class="element">
+            <img class="element__image" src="./images/monaknapa.jpg" alt="Замок в Ирландии">
+            <div class="element__description">
+              <h2 class="element__title">Монакнаппа</h2>
+              <button class="element__like-btn"></button>
+            </div>
+          </article>
+        </li>
+        <li>
+          <article class="element">
+            <img class="element__image" src="./images/frankfurt.jpg" alt="Улица Франкфурта">
+            <div class="element__description">
+              <h2 class="element__title">Франкфурт</h2>
+              <button class="element__like-btn"></button>
+            </div>
+          </article>
+        </li>
+        <li>
+          <article class="element">
+            <img class="element__image" src="./images/nijniy-novgorod.jpg" alt="Вид на Волгу в Нижнем-Новгороде">
+            <div class="element__description">
+              <h2 class="element__title">Нижний-Новгород</h2>
+              <button class="element__like-btn"></button>
+            </div>
+          </article>
+        </li>
+        <li>
+          <article class="element">
+            <img class="element__image" src="./images/sankt-petersburg.jpg" alt="Лахта центр в Санкт-Петербурге">
+            <div class="element__description">
+              <h2 class="element__title">Санкт-Петербург</h2>
+              <button class="element__like-btn"></button>
+            </div>
+          </article>
+        </li>
+      </ul>
+    </section>
+  </main>
+  <div class="popup">
+    <div class="popup__container">
+      <button class="popup__close-btn"></button>
+      <h2 class="popup__title">Редактировать профиль</h2>
+      <form class="popup__form">
+        <input class="popup__input" type="text" id="name" name="name" placeholder="Имя" autocomplete="off">
+        <input class="popup__input" type="text" id="job" name="job" placeholder="О себе" autocomplete="off">
+        <button class="popup__save-btn" type="submit">Сохранить</button>
+      </form> 
+    </div>
+  </div>
+  <footer class="footer">
+    <h2 class="footer__copyright">© 2020 Mesto Russia</h2>
+  </footer>
+<script src="./scripts/index.js"></script>
+</body>
+</html>
