@@ -2,7 +2,9 @@
   border-radius: 50%;
   max-width: 120px;
   max-height: 120px;
+  width: 100%;
   box-sizing: border-box;
+  object-fit: cover;
 }
 
 @media screen and (max-width: 768px) {
