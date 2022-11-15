@@ -5,10 +5,12 @@
   min-width: 32px;
   min-height: 32px;
   background-color: rgba(0, 0, 0, 0);
-  background-image: url(../../../images/close_button.png);
+  background-image: url(../../../images/close_button.svg);
   background-position: center;
   background-repeat: no-repeat;
   border: none;
+  background-size: cover;
+  cursor: pointer;
 }
 
 .popup__close-btn:hover {
