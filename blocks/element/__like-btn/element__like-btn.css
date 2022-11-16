@@ -1,12 +1,11 @@
 .element__like-btn {
-  min-height: 19px;
-  min-width: 22px;
+  height: 19px;
+  width: 22px;
   background-image: url(../../../images/like_button_disable.svg);
   background-repeat: no-repeat;
   background-position: center;
   border: none;
   background-color: #fff;
-  background-size: cover;
   cursor: pointer;
 }
 
