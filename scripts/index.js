@@ -27,8 +27,8 @@ const popupViewButtonClose = popupView.querySelector('.popup__close-image');
 
 //Тэмплэйт для создания карточки
 const cardsContainer = document.querySelector('.elements__list'); // Получаем список из разметки
-const templateElement = document.querySelector('.elements__item-template'); // Получаем блок template (заготовка)
-const templateItem = templateElement.querySelector('.elements__item'); // Получаем элемент списка 
+
+ 
 
 //Функция открытия попапов
 function openPopup(popupElement) {
