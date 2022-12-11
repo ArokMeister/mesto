@@ -28,13 +28,22 @@ const popupView = document.querySelector('.popup_view');
 const cardsContainer = document.querySelector('.elements__list'); // Получаем список из разметки
 
 //Функция открытия попапов
-function openPopup(popupElement) {
+const openPopup = (popupElement) => {
   popupElement.classList.add('popup_opened');
+  body.addEventListener('keydown', handleKeyDown);
 };
 
 //Функция закрытия попапов
-function closePopup(popupElement) {
+const closePopup = (popupElement) => {
   popupElement.classList.remove('popup_opened');
+  body.removeEventListener('keydown', handleKeyDown);
+};
+
+const handleKeyDown = (evt) => {
+  const modalOpen = document.querySelector('.popup_opened');
+  if (evt.key === 'Escape') {
+    closePopup(modalOpen);
+  }
 };
 
 // Функция возврата клонированной карточки с обработкой лайка, кнопки удаления и возможности просмотра картинки по клику
@@ -61,12 +70,6 @@ function createCard(placeValue, urlValue) {
       popupViewImage.alt = placeValue;
       popupViewCaption.textContent = placeValue;
       openPopup(popupView);
-      body.addEventListener('keydown', (evt) => {
-        if (evt.key === 'Escape') {
-          closePopup(popupView);
-          body.removeEventListener('keydown', evt)
-        }
-      })
     };
   });
 
@@ -103,25 +106,14 @@ body.addEventListener('click', function(evt) {
   if (evt.target.classList.contains('profile__edit-btn')) {
     openPopup(popupProfile);
     rename();
-    body.addEventListener('keydown', (evt) => {
-      if (evt.key === 'Escape') {
-        closePopup(popupProfile);
-        body.removeEventListener('keydown', evt)
-      }
-    })
   };
   if (evt.target.classList.contains('popup__close-profile') || evt.target.classList.contains('popup_profile')) {
     closePopup(popupProfile);
   };
   if (evt.target.classList.contains('profile__add-btn')) {
     openPopup(popupPlace);
-    // popupPlaceCreateButton.disabled = 'disabled';
-    body.addEventListener('keydown', (evt) => {
-      if (evt.key === 'Escape') {
-        closePopup(popupPlace);
-        body.removeEventListener('keydown', evt)
-      }
-    })
+    popupPlaceCreateButton.setAttribute('disabled', 'disabled');
+    popupPlaceCreateButton.classList.add('popup__button_disabled');
   };
   if (evt.target.classList.contains('popup__close-place') || evt.target.classList.contains('popup_place')) {
     closePopup(popupPlace);
@@ -130,17 +122,6 @@ body.addEventListener('click', function(evt) {
     closePopup(popupView);
   };
 });
-
-// Закрытие любого попапа по кнопке Escape
-// body.addEventListener('keydown', function(evt) {
-//   // if (modal === )
-  
-//   if (evt.key === 'Escape') {
-//     closePopup(popupProfile);
-//     // closePopup(popupPlace);
-//     closePopup(popupView);
-//   }
-// });
 
 //Слушатель на сабмит на кнопке в попапе профиля
 popupFormProfile.addEventListener('submit', formSubmitHandler);
