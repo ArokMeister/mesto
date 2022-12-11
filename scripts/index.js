@@ -4,38 +4,25 @@ import initialCards from './arrays.js';
 //Найдем тело страницы, для написания обрабочкика событий всех попапов
 const body = document.querySelector('.page');
 
-// //Находим формы и их элементы
-// const formProfile = document.forms.profileform;
-// const formProfileName = formProfile.elements.name;
-// const formProfileJob = formProfile.elements.job;
-
-// const formPlace = document.forms.placeform;
-// const formPlaceSpot = formPlace.elements.place;
-// const formPlaceUrl = formPlace.elements.url;
-
 //Строки из блока профиля
 const nameProfileElement = document.querySelector('.profile__name'); //Строка с именем профиля
 const professionProfileElement = document.querySelector('.profile__profession'); //Строка с профессией профиля
 
 // Popoup edit profile
 const popupProfile = document.querySelector('.popup_profile'); // Попап для редактирования профиля
-// const popupProfileButtonOpen = document.querySelector('.profile__edit-btn');
-// const popupProfileButtonClose = popupProfile.querySelector('.popup__close-profile');
 const popupFormProfile = popupProfile.querySelector('.popup__form-profile');
 const popupInputName = popupProfile.querySelector('.popup__input-name');
 const popupInputJob = popupProfile.querySelector('.popup__input-job');
 
 // Popup add cards
 const popupPlace = document.querySelector('.popup_place'); // Попап для добавления картинки
-// const popupPlaceButtonOpen = document.querySelector('.profile__add-btn');
-// const popupPlaceButtonClose = popupPlace.querySelector('.popup__close-place');
+const popupPlaceCreateButton = popupPlace.querySelector('.popup__create-button');
 const popupFormPlace = popupPlace.querySelector('.popup__form-place');
 const popupInputPlace = popupPlace.querySelector('.popup__input-place');
 const popupInputUrl = popupPlace.querySelector('.popup__input-url');
 
 //Popup image
 const popupView = document.querySelector('.popup_view');
-// const popupViewButtonClose = popupView.querySelector('.popup__close-image');
 
 //Тэмплэйт для создания карточки
 const cardsContainer = document.querySelector('.elements__list'); // Получаем список из разметки
@@ -62,7 +49,6 @@ function createCard(placeValue, urlValue) {
   templateImage.src = urlValue;
   templateImage.alt = placeValue;
   templateTitle.textContent = placeValue;
-
   templateItem.addEventListener('click', function(evt) {
     if (evt.target.classList.contains('element__like-btn')) {
       evt.target.classList.toggle('element__like-btn_active');
@@ -75,6 +61,12 @@ function createCard(placeValue, urlValue) {
       popupViewImage.alt = placeValue;
       popupViewCaption.textContent = placeValue;
       openPopup(popupView);
+      body.addEventListener('keydown', (evt) => {
+        if (evt.key === 'Escape') {
+          closePopup(popupView);
+          body.removeEventListener('keydown', evt)
+        }
+      })
     };
   });
 
@@ -111,12 +103,25 @@ body.addEventListener('click', function(evt) {
   if (evt.target.classList.contains('profile__edit-btn')) {
     openPopup(popupProfile);
     rename();
+    body.addEventListener('keydown', (evt) => {
+      if (evt.key === 'Escape') {
+        closePopup(popupProfile);
+        body.removeEventListener('keydown', evt)
+      }
+    })
   };
   if (evt.target.classList.contains('popup__close-profile') || evt.target.classList.contains('popup_profile')) {
     closePopup(popupProfile);
   };
   if (evt.target.classList.contains('profile__add-btn')) {
     openPopup(popupPlace);
+    // popupPlaceCreateButton.disabled = 'disabled';
+    body.addEventListener('keydown', (evt) => {
+      if (evt.key === 'Escape') {
+        closePopup(popupPlace);
+        body.removeEventListener('keydown', evt)
+      }
+    })
   };
   if (evt.target.classList.contains('popup__close-place') || evt.target.classList.contains('popup_place')) {
     closePopup(popupPlace);
@@ -127,15 +132,15 @@ body.addEventListener('click', function(evt) {
 });
 
 // Закрытие любого попапа по кнопке Escape
-body.addEventListener('keydown', function(evt) {
-  // if (modal === )
+// body.addEventListener('keydown', function(evt) {
+//   // if (modal === )
   
-  if (evt.key === 'Escape') {
-    closePopup(popupProfile);
-    closePopup(popupPlace);
-    closePopup(popupView);
-  }
-});
+//   if (evt.key === 'Escape') {
+//     closePopup(popupProfile);
+//     // closePopup(popupPlace);
+//     closePopup(popupView);
+//   }
+// });
 
 //Слушатель на сабмит на кнопке в попапе профиля
 popupFormProfile.addEventListener('submit', formSubmitHandler);
