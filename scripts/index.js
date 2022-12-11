@@ -72,7 +72,6 @@ function createCard(placeValue, urlValue) {
       openPopup(popupView);
     };
   });
-
   return templateItem;
 };
 
