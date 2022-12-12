@@ -1,22 +1,14 @@
-//Показывает и скрывает ошибку
-const toggleError = (obj, input) => {
-  const { errorClass } = obj;
-  error = document.querySelector(`#${input.id}-error`);
+//Проверка на валидность инпутов
+const checkInputValid = (obj, input) => {
+  const { inputErrorClass, errorClass } = obj;
+  const error = document.querySelector(`#${input.id}-error`);
   if (input.validity.valid) {
     error.textContent = '';
     error.classList.remove(errorClass);
+    input.classList.remove(inputErrorClass);
   } else {
     error.textContent = input.validationMessage;
     error.classList.add(errorClass);
-  }
-};
-
-//Подсветка не валидности инпутов
-const checkInputValid = (obj, input) => {
-  const { inputErrorClass } = obj;
-  if (input.validity.valid) {
-    input.classList.remove(inputErrorClass);
-  } else {
     input.classList.add(inputErrorClass);
   }
 };
@@ -46,7 +38,7 @@ const enableValidation = (obj) => {
     inputs.forEach(input => {
       input.addEventListener('input', () => {
         checkInputValid(rest, input);
-        toggleError(rest, input);
+        // toggleError(rest, input);
         toggleButtonIsValid(rest, inputs, button);
       })
     })
