@@ -26,15 +26,15 @@ const popupInputPlace = popupPlace.querySelector('.popup__input-place');
 const popupInputUrl = popupPlace.querySelector('.popup__input-url');
 
 //Popup image
-export const popupView = document.querySelector('.popup_view');
-export const popupViewImage = popupView.querySelector('.popup__image');
-export const popupViewCaption = popupView.querySelector('.popup__caption');
+const popupView = document.querySelector('.popup_view');
+const popupViewImage = popupView.querySelector('.popup__image');
+const popupViewCaption = popupView.querySelector('.popup__caption');
 
 //Тэмплэйт для создания карточки
 const cardsContainer = document.querySelector('.elements__list'); // Получаем список из разметки
 
 //Функция открытия попапов
-export const openPopup = (popupElement) => {
+const openPopup = (popupElement) => {
   popupElement.classList.add('popup_opened');
   document.addEventListener('keydown', handlerKeyDown);
 };
@@ -55,7 +55,7 @@ const handlerKeyDown = (evt) => {
 
 //Функция создания карточек
 const createCard = (item) => {
-  const card = new Card(item, '.elements__item-template');
+  const card = new Card(item, '.elements__item-template', handleCardClick);
   const cardElement = card.generateCard();
   return cardElement;
 }
@@ -66,14 +66,21 @@ initialCards.forEach(item => {
   cardsContainer.prepend(cardElement);
 });
 
+function handleCardClick(name, link) {
+  popupViewImage.src = link;
+  popupViewImage.alt = name;
+  popupViewCaption.textContent = name;
+  openPopup(popupView);
+}
+
 //Функция, которая позволяет инпутам в форме попапа, принять текстовые значения из блока профиля для имени и професии
-function rename() {
+function fillProfileInputs() {
   popupInputName.value = nameProfileElement.textContent;
   popupInputJob.value = professionProfileElement.textContent;
 };
 
 //Функция, которая вносит изменения в имя и профессию в блоке профиля, записывая данные которые вписываются в инпуты в попапе
-function handlerFormSubmit(evt) {
+function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   nameProfileElement.textContent = popupInputName.value;
   professionProfileElement.textContent = popupInputJob.value;
@@ -83,12 +90,11 @@ function handlerFormSubmit(evt) {
 //Обработчики событий
 popupProfileEditButton.addEventListener('click', () => {
     openPopup(popupProfile);
-    rename();
+    fillProfileInputs();
 });
 
 //Открытие попапа добавления картинки и ресет формы
 popupPlaceAddButton.addEventListener('click', () => {
-  popupFormPlace.reset();
   openPopup(popupPlace);
 });
 
@@ -102,7 +108,7 @@ popups.forEach(popup => {
 });
 
 //Слушатель на сабмит на кнопке в попапе профиля
-popupFormProfile.addEventListener('submit', handlerFormSubmit);
+popupFormProfile.addEventListener('submit', handleProfileFormSubmit);
 
 // Случашетль для формы, которая после сабмита запускает функцию клонирования карточки
 popupFormPlace.addEventListener('submit', function(evt) {
@@ -110,6 +116,7 @@ popupFormPlace.addEventListener('submit', function(evt) {
   const cardElement = createCard({name: popupInputPlace.value, link: popupInputUrl.value});
   cardsContainer.prepend(cardElement);
   closePopup(popupPlace);
+  evt.target.reset();
 });
 
 //Запускаем на каждую форму валидацию

@@ -33,6 +33,8 @@ class FormValidator {
   };
 
   _setEventListeners() {
+    this._toggleButtonIsValid();
+    
     this._inputs.forEach(input => {
       input.addEventListener('input', () => {
         this._checkInputValid(input);

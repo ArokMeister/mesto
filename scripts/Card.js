@@ -1,10 +1,9 @@
-import { popupViewImage, popupViewCaption, popupView, openPopup } from './index.js';
-
 class Card {
-  constructor(data, templateSelector) {
+  constructor(data, templateSelector, handleCardClick) {
     this._value = data.name;
     this._url = data.link;
     this._templateSelector = templateSelector;
+    this._handleCardClick = handleCardClick;
   };
 
   _getTemplate() {
@@ -15,35 +14,36 @@ class Card {
 
   generateCard() {
     this._element = this._getTemplate();
-    this._setEventListeners();
+    this._cardImage = this._element.querySelector('.element__image-temp');
     
-    this._element.querySelector('.element__image-temp').src = this._url;
-    this._element.querySelector('.element__image-temp').alt = this._value;
+    this._cardImage.src = this._url;
+    this._cardImage.alt = this._value;
     this._element.querySelector('.element__title-temp').textContent = this._value;
+
+    this._setEventListeners();
 
     return this._element;
   };
 
   _setEventListeners() {
-    this._element.querySelector('.element__image-temp').addEventListener('click', () => {
-      popupViewImage.src = this._url;
-      popupViewImage.alt = this._value;
-      popupViewCaption.textContent = this._value;
-      openPopup(popupView);
+    this._likeButton = this._element.querySelector('.element__like-btn');
+
+    this._cardImage.addEventListener('click', () => {
+      this._handleCardClick(this._value, this._url)
     });
-    this._element.querySelector('.element__like-btn').addEventListener('click', () => {
-      this._handlerLikeClick();
+    this._likeButton.addEventListener('click', () => {
+      this._handleLikeClick();
     });
     this._element.querySelector('.element__remove-btn').addEventListener('click', () => {
-      this._handlerRemoveClick();
+      this._handleRemoveClick();
     });
   };
 
-  _handlerLikeClick() {
-    this._element.querySelector('.element__like-btn').classList.toggle('element__like-btn_active');
+  _handleLikeClick() {
+    this._likeButton.classList.toggle('element__like-btn_active');
   };
 
-  _handlerRemoveClick() {
+  _handleRemoveClick() {
     this._element.remove();
   };
 };
