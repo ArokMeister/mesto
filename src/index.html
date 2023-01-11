@@ -4,17 +4,16 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./pages/index.css">
   <link rel="shortcut icon" href="./images/header__logo.svg"  type="image/svg">
   <title>Mesto</title>
 </head>
 <body class="page">
   <header class="header">
-    <img class="header__logo" src="./images/header__logo.svg" alt="Логотип Mesto Russia">
+    <img class="header__logo" src="<%=require('./images/header__logo.svg')%>" alt="Логотип Mesto Russia">
   </header>
   <main class="content">
     <section class="profile">
-      <img class="profile__avatar" src="./images/avatar.jpg" alt="Аватар пользователя">
+      <img class="profile__avatar" src="<%=require('./images/avatar.jpg')%>" alt="Аватар пользователя">
       <div class="profile__info">
         <h1 class="profile__name">Денис Ширяев</h1>
         <button class="profile__edit-btn" type="button" aria-label="Добавить фото"></button>
@@ -28,7 +27,7 @@
     </section>
   </main>
   <footer class="footer">
-    <p class="footer__copyright">© 2022 Mesto Russia</p>
+    <p class="footer__copyright">© 2023 Mesto Russia</p>
   </footer>
   <div class="popup popup_profile">
     <div class="popup__container">
@@ -75,6 +74,5 @@
     </article>
   </li>
 </template>
-<script src="./scripts/index.js" type="module"></script>
 </body>
 </html>
