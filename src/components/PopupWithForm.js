@@ -5,12 +5,12 @@ class PopupWithForm extends Popup {
     super(popupSelector);
     this._submit = submit;
     this._form = this._popup.querySelector('.popup__form');
+    this._inputList = [...this._form.querySelectorAll('.popup__input')];
   }
 
   _getInputValues() {
-    this._inputs = [...this._form.querySelectorAll('.popup__input')];
     const inputValues = {};
-    this._inputs.map(input => inputValues[input.name] = input.value);
+    this._inputList.map(input => inputValues[input.name] = input.value);
     return inputValues;
   }
 
@@ -20,6 +20,13 @@ class PopupWithForm extends Popup {
       this._form.reset();
     }, 200);
   }
+
+  // Пока не совсем понял что передавать в data для подхвата данных из разметки
+  // setInputValues(data) {
+  //   this._inputList.forEach((input) => {
+  //     input.value = data[input.name];
+  //   })
+  // }
 
   setEventListeners() {
     this._popup.addEventListener('submit', () => {

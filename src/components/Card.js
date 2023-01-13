@@ -15,10 +15,11 @@ class Card {
   generateCard() {
     this._element = this._getTemplate();
     this._cardImage = this._element.querySelector('.element__image-temp');
+    this._cardImageCaption = this._element.querySelector('.element__title-temp');
     
     this._cardImage.src = this._url;
     this._cardImage.alt = this._value;
-    this._element.querySelector('.element__title-temp').textContent = this._value;
+    this._cardImageCaption.textContent = this._value;
 
     this._setEventListeners();
 

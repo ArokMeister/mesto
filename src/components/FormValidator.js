@@ -43,6 +43,14 @@ class FormValidator {
     this._button.disabled = true;
   };
 
+  // При вызове метода в обработчике клика на кнопку открытия попапа картинки, появляются ошибки
+  // resetValidation() {
+  //   this._toggleButtonIsValid();
+  //   this._inputs.forEach((input) => {
+  //     this._hideInputError(input)
+  //   });
+  // }
+
   _toggleButtonIsValid() {
     const isValid = this._inputs.every(input => input.validity.valid); // короткая запись возврата (вместо {return input.validity.valid})
     isValid ? this._activeButton() : this._inactiveButton();

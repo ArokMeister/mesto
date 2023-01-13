@@ -6,11 +6,12 @@ class Section {
   };
 
   renderItems() {
-    this._items.forEach(item => this._renderer(item));
+    this._items.forEach(item => this.addItem(item));
   };
 
   addItem(element) {
-    this._containerSelector.append(element);
+    const card = this._renderer(element)
+    this._containerSelector.append(card);
   };
 };
 

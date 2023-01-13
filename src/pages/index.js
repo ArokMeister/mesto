@@ -17,8 +17,8 @@ const popupInputJob = document.querySelector('.popup__input-job');
 // Popup add cards
 const popupPlaceAddButton = document.querySelector('.profile__add-btn');
 
-//Тэмплэйт для создания карточки
-const cardsContainer = document.querySelector('.elements__list'); // Получаем список из разметки
+//Контейнер (список в разметке) куда встаятся карточки
+const cardsContainer = document.querySelector('.elements__list');
 
 //Функция создания карточек
 const createCard = (item) => {
@@ -30,21 +30,10 @@ const createCard = (item) => {
 //Вставка карточек из готового массива
 const insertCard = new Section({
   items: initialCards,
-  renderer: (item) => {
-    const cardElement = createCard(item);
-    insertCard.addItem(cardElement);
-  }
-}, '.elements__list');
+  renderer: createCard
+  }, '.elements__list');
 
 insertCard.renderItems();
-
-function handleCardClick(name, link) {
-  const popupView = new PopupWithImage('.popup_view', name, link);
-  popupView.setEventListeners();
-  popupView.open();
-};
-
-const userInfo = new UserInfo({ nameSelector: '.profile__name', descriptionSelector: '.profile__profession'});
 
 //Функция, которая позволяет инпутам в форме попапа, принять текстовые значения из блока профиля для имени и професии
 function fillProfileInputs() {
@@ -53,11 +42,19 @@ function fillProfileInputs() {
   popupInputJob.value = profileValues.about;
 };
 
-//Функция, которая вносит изменения в имя и профессию в блоке профиля, записывая данные которые вписываются в инпуты в попапе
+//Экземпляры классов и их обработчики с функциями
+const userInfo = new UserInfo({ nameSelector: '.profile__name', descriptionSelector: '.profile__profession'});
+
+const popupProfile = new PopupWithForm('.popup_profile', handleProfileFormSubmit);
+popupProfile.setEventListeners();
+
 function handleProfileFormSubmit({ name, job }) {
   userInfo.setUserInfo(name, job);
   popupProfile.close();
 };
+
+const popupPlace = new PopupWithForm('.popup_place', handlePlaceFormSubmit);
+popupPlace.setEventListeners();
 
 function handlePlaceFormSubmit({ place, url }) {
   const cardElement = createCard({name: place, link: url});
@@ -65,11 +62,31 @@ function handlePlaceFormSubmit({ place, url }) {
   popupPlace.close();
 };
 
-const popupProfile = new PopupWithForm('.popup_profile', handleProfileFormSubmit);
-popupProfile.setEventListeners();
+const popupView = new PopupWithImage('.popup_view');
+popupView.setEventListeners();
 
-const popupPlace = new PopupWithForm('.popup_place', handlePlaceFormSubmit);
-popupPlace.setEventListeners();
+function handleCardClick(name, link) {
+  popupView.open(name, link);
+};
+
+// Запускаем на каждую форму валидацию
+// document.querySelectorAll(configuration.formSelector).forEach(form => {
+//   const formValidator = new FormValidator(configuration, form);
+//   formValidator.enableValidation();
+// });
+
+const formValidators = {};
+const enableValidation = (configuration) => {
+  const formList = Array.from(document.querySelectorAll(configuration.formSelector));
+  formList.forEach((formElement) => {
+    const validator = new FormValidator(configuration, formElement);
+    const formName = formElement.getAttribute('name');
+    formValidators[formName] = validator;
+    validator.enableValidation();
+  })
+};
+
+enableValidation(configuration);
 
 //Обработчики событий
 popupProfileEditButton.addEventListener('click', () => {
@@ -80,10 +97,4 @@ popupProfileEditButton.addEventListener('click', () => {
 //Открытие попапа добавления картинки и ресет формы
 popupPlaceAddButton.addEventListener('click', () => {
   popupPlace.open();
-});
-
-//Запускаем на каждую форму валидацию
-document.querySelectorAll(configuration.formSelector).forEach(form => {
-  const formValidator = new FormValidator(configuration, form);
-  formValidator.enableValidation();
 });
