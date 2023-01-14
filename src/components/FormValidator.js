@@ -21,6 +21,7 @@ class FormValidator {
   };
 
   _hideInputError(input) {
+    this._error = document.querySelector(`#${input.id}-error`);
     this._error.textContent = '';
     this._error.classList.remove(this._errorClass);
     input.classList.remove(this._inputErrorClass);
@@ -44,12 +45,12 @@ class FormValidator {
   };
 
   // При вызове метода в обработчике клика на кнопку открытия попапа картинки, появляются ошибки
-  // resetValidation() {
-  //   this._toggleButtonIsValid();
-  //   this._inputs.forEach((input) => {
-  //     this._hideInputError(input)
-  //   });
-  // }
+  resetValidation() {
+    this._toggleButtonIsValid();
+    this._inputs.forEach((input) => {
+      this._hideInputError(input)
+    });
+  }
 
   _toggleButtonIsValid() {
     const isValid = this._inputs.every(input => input.validity.valid); // короткая запись возврата (вместо {return input.validity.valid})

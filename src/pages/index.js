@@ -11,14 +11,9 @@ import { UserInfo } from '../components/UserInfo.js';
 
 // Popoup edit profile
 const popupProfileEditButton = document.querySelector('.profile__edit-btn');
-const popupInputName = document.querySelector('.popup__input-name');
-const popupInputJob = document.querySelector('.popup__input-job');
 
 // Popup add cards
 const popupPlaceAddButton = document.querySelector('.profile__add-btn');
-
-//Контейнер (список в разметке) куда встаятся карточки
-const cardsContainer = document.querySelector('.elements__list');
 
 //Функция создания карточек
 const createCard = (item) => {
@@ -38,8 +33,7 @@ insertCard.renderItems();
 //Функция, которая позволяет инпутам в форме попапа, принять текстовые значения из блока профиля для имени и професии
 function fillProfileInputs() {
   const profileValues = userInfo.getUserInfo();
-  popupInputName.value = profileValues.name;
-  popupInputJob.value = profileValues.about;
+  popupProfile.setInputValues(profileValues);
 };
 
 //Экземпляры классов и их обработчики с функциями
@@ -48,8 +42,8 @@ const userInfo = new UserInfo({ nameSelector: '.profile__name', descriptionSelec
 const popupProfile = new PopupWithForm('.popup_profile', handleProfileFormSubmit);
 popupProfile.setEventListeners();
 
-function handleProfileFormSubmit({ name, job }) {
-  userInfo.setUserInfo(name, job);
+function handleProfileFormSubmit({ name, about }) {
+  userInfo.setUserInfo(name, about);
   popupProfile.close();
 };
 
@@ -57,10 +51,15 @@ const popupPlace = new PopupWithForm('.popup_place', handlePlaceFormSubmit);
 popupPlace.setEventListeners();
 
 function handlePlaceFormSubmit({ place, url }) {
-  const cardElement = createCard({name: place, link: url});
-  cardsContainer.prepend(cardElement);
+  insertCard.addItem({name: place, link: url})
   popupPlace.close();
 };
+
+// function handlePlaceFormSubmit({ place, url }) {
+//   const cardElement = createCard({name: place, link: url});
+//   cardsContainer.prepend(cardElement);
+//   popupPlace.close();
+// };
 
 const popupView = new PopupWithImage('.popup_view');
 popupView.setEventListeners();
@@ -69,12 +68,14 @@ function handleCardClick(name, link) {
   popupView.open(name, link);
 };
 
-// Запускаем на каждую форму валидацию
+// Запускаем на каждую форму валидацию если бы метод resetValidation() был приватным
 // document.querySelectorAll(configuration.formSelector).forEach(form => {
 //   const formValidator = new FormValidator(configuration, form);
 //   formValidator.enableValidation();
 // });
 
+
+//Запуск валидации форм, для использования публичного метода resetValidation()
 const formValidators = {};
 const enableValidation = (configuration) => {
   const formList = Array.from(document.querySelectorAll(configuration.formSelector));
@@ -90,11 +91,13 @@ enableValidation(configuration);
 
 //Обработчики событий
 popupProfileEditButton.addEventListener('click', () => {
+  formValidators['profileform'].resetValidation();
   popupProfile.open();
   fillProfileInputs();
 });
 
 //Открытие попапа добавления картинки и ресет формы
 popupPlaceAddButton.addEventListener('click', () => {
+  formValidators['placeform'].resetValidation();
   popupPlace.open();
 });

@@ -21,12 +21,12 @@ class PopupWithForm extends Popup {
     }, 200);
   }
 
-  // Пока не совсем понял что передавать в data для подхвата данных из разметки
-  // setInputValues(data) {
-  //   this._inputList.forEach((input) => {
-  //     input.value = data[input.name];
-  //   })
-  // }
+  // Разобрался, спасибо Вам за такие подробные комментарии, это помогает начинать разбираться и понимать, почему предложеный Вами вариант работает
+  setInputValues(data) {
+    this._inputList.forEach((input) => {
+      input.value = data[input.name];
+    })
+  }
 
   setEventListeners() {
     this._popup.addEventListener('submit', () => {

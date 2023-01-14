@@ -11,7 +11,7 @@ class Section {
 
   addItem(element) {
     const card = this._renderer(element)
-    this._containerSelector.append(card);
+    this._containerSelector.prepend(card);
   };
 };
 
