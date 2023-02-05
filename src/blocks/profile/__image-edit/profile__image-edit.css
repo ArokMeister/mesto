@@ -3,15 +3,17 @@
   min-height: 120px;
   position: absolute;
   border-radius: 50%;
-}
-
-.profile__image-edit:hover {
+  transition: opacity .3s;
+  opacity: 0;
   background-image: url(../../../images/pen_avatar.png);
   background-repeat: no-repeat;
   background-position: center;
   background-size: 26px 26px;
   background-color: rgba(0, 0, 0, .8);
-  transition: .3s;
+}
+
+.profile__image-edit:hover {
+  opacity: 1;
 }
 
 @media screen and (max-width: 768px) {
