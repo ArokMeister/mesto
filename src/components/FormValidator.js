@@ -21,14 +21,14 @@ class FormValidator {
   };
 
   _hideInputError(input) {
-    this._error = document.querySelector(`#${input.id}-error`);
+    this._error = this._formElement.querySelector(`#${input.id}-error`);
     this._error.textContent = '';
     this._error.classList.remove(this._errorClass);
     input.classList.remove(this._inputErrorClass);
   };
 
   _checkInputValid(input) {
-    this._error = document.querySelector(`#${input.id}-error`);
+    this._error = this._formElement.querySelector(`#${input.id}-error`);
     input.validity.valid 
     ? this._hideInputError(input)
     : this._showInputError(input);

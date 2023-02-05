@@ -6,6 +6,7 @@ class PopupWithForm extends Popup {
     this._submit = submit;
     this._form = this._popup.querySelector('.popup__form');
     this._inputList = [...this._form.querySelectorAll('.popup__input')];
+    this._submitButton = this._popup.querySelector('.popup__button');
   }
 
   _getInputValues() {
@@ -18,10 +19,10 @@ class PopupWithForm extends Popup {
     super.close();
     setTimeout(() => {
       this._form.reset();
+      this._submitButton.textContent = 'Сохранить'
     }, 200);
   }
 
-  // Разобрался, спасибо Вам за такие подробные комментарии, это помогает начинать разбираться и понимать, почему предложеный Вами вариант работает
   setInputValues(data) {
     this._inputList.forEach((input) => {
       input.value = data[input.name];
@@ -31,7 +32,8 @@ class PopupWithForm extends Popup {
   setEventListeners() {
     this._popup.addEventListener('submit', () => {
       const inputValues = this._getInputValues();
-      this._submit(inputValues)});
+      this._submit(inputValues);
+      this._submitButton.textContent = 'Сохранение...'});
     super.setEventListeners();
   }
 }
