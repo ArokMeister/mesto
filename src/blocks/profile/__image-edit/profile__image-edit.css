@@ -2,14 +2,14 @@
   min-width: 120px;
   min-height: 120px;
   position: absolute;
-  border-radius: 50%;
+  border-radius: 45%;
   transition: opacity .3s;
   opacity: 0;
   background-image: url(../../../images/pen_avatar.png);
   background-repeat: no-repeat;
   background-position: center;
   background-size: 26px 26px;
-  background-color: rgba(0, 0, 0, .8);
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 .profile__image-edit:hover {
