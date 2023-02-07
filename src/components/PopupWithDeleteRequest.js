@@ -5,16 +5,16 @@ class PopupWithDeleteRequest extends Popup {
     super(popupSelector);
     this._submit = submit;
     this._buttonConfirm = this._popup.querySelector('.popup__button-yes');
+    this._buttonConfirmDefaultText = this._buttonConfirm.textContent;
     this._cardId = null;
     this._fnDelete = null;
-    this._defaultButtonText = 'Да';
   }
 
   setEventListeners() {
     this._buttonConfirm.addEventListener('click', (evt) => {
       evt.preventDefault();
-      this._submit(this._cardId, this._fnDelete)
       this._buttonConfirm.textContent = 'Удаляю';
+      this._submit(this._cardId, this._fnDelete);
     });
     super.setEventListeners()
   }
@@ -27,7 +27,7 @@ class PopupWithDeleteRequest extends Popup {
 
   setDefaultButtonText() {
     setTimeout(() => {
-      this._buttonConfirm.textContent = this._defaultButtonText;
+      this._buttonConfirm.textContent = this._buttonConfirmDefaultText;
     }, 200);
   }
 }

@@ -2,7 +2,7 @@
   min-width: 120px;
   min-height: 120px;
   position: absolute;
-  border-radius: 45%;
+  border-radius: 50%;
   transition: opacity .3s;
   opacity: 0;
   background-image: url(../../../images/pen_avatar.png);

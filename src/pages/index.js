@@ -48,10 +48,10 @@ function handlePlaceFormSubmit(data) {
       insertCard.addItem(res);
       popupPlace.close();
     })
-    .then(() => {
-      popupPlace.setDefaultButtonPlaceText();
-    })
     .catch(err => console.log(err))
+    .finally(() => {
+      popupPlace.setDefaultButtonText();
+    })
 };
 
 function handleSubmitDeleteRequest(cardId, fnDelete) {
@@ -60,10 +60,10 @@ function handleSubmitDeleteRequest(cardId, fnDelete) {
       fnDelete();
       popupWithQuestion.close();
     })
-    .then(() => {
+    .catch(err => console.log(err))
+    .finally(() => {
       popupWithQuestion.setDefaultButtonText();
     })
-    .catch(err => console.log(err))
 };
 
 function handleProfileFormSubmit(data) {
@@ -72,10 +72,10 @@ function handleProfileFormSubmit(data) {
       userInfo.setUserInfo(res);
       popupProfile.close();
     })
-    .then(() => {
-      popupProfile.setDefaultButtonProfileText();
-    })
     .catch(err => console.log(err))
+    .finally(() => {
+      popupProfile.setDefaultButtonText();
+    })
 };
 
 function hadleSubmitAvatar(data) {
@@ -85,6 +85,9 @@ function hadleSubmitAvatar(data) {
       avatarPopup.close()
     })
     .catch(err => console.log(err))
+    .finally(() => {
+      avatarPopup.setDefaultButtonText();
+    })
 };
 
 function handleCardClick(name, link) {
