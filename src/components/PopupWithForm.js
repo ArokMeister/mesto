@@ -7,6 +7,10 @@ class PopupWithForm extends Popup {
     this._form = this._popup.querySelector('.popup__form');
     this._inputList = [...this._form.querySelectorAll('.popup__input')];
     this._submitButton = this._popup.querySelector('.popup__button');
+    this._submitButtonPlace = this._popup.querySelector('.popup__create-button');
+    this._submitButtonProfile = this._popup.querySelector('.popup__save-button');
+    this._defaultPlaceButtonText = 'Создать';
+    this._defaultProfileButtonText = 'Сохранить';
   }
 
   _getInputValues() {
@@ -15,11 +19,11 @@ class PopupWithForm extends Popup {
     return inputValues;
   }
 
+  //До переделки, текст кнопки менялся в этом таймере (заметка для себя)
   close() {
     super.close();
     setTimeout(() => {
       this._form.reset();
-      this._submitButton.textContent = 'Сохранить'
     }, 200);
   }
 
@@ -35,6 +39,18 @@ class PopupWithForm extends Popup {
       this._submit(inputValues);
       this._submitButton.textContent = 'Сохранение...'});
     super.setEventListeners();
+  }
+
+  setDefaultButtonPlaceText() {
+    setTimeout(() => {
+      this._submitButton.textContent = this._defaultPlaceButtonText;
+    }, 200);
+  }
+
+  setDefaultButtonProfileText() {
+    setTimeout(() => {
+      this._submitButton.textContent = this._defaultProfileButtonText;
+    }, 200);
   }
 }
 

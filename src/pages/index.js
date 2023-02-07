@@ -37,6 +37,7 @@ function handleLikeClick(cardId, card) {
   api.setLikes(cardId, method)
     .then(res => {
       card.setLikesCounter(res.likes.length);
+      card.changeVisualLike();
     })
     .catch(err => console.log(err))
 };
@@ -47,6 +48,9 @@ function handlePlaceFormSubmit(data) {
       insertCard.addItem(res);
       popupPlace.close();
     })
+    .then(() => {
+      popupPlace.setDefaultButtonPlaceText();
+    })
     .catch(err => console.log(err))
 };
 
@@ -56,6 +60,9 @@ function handleSubmitDeleteRequest(cardId, fnDelete) {
       fnDelete();
       popupWithQuestion.close();
     })
+    .then(() => {
+      popupWithQuestion.setDefaultButtonText();
+    })
     .catch(err => console.log(err))
 };
 
@@ -64,6 +71,9 @@ function handleProfileFormSubmit(data) {
     .then(res => {
       userInfo.setUserInfo(res);
       popupProfile.close();
+    })
+    .then(() => {
+      popupProfile.setDefaultButtonProfileText();
     })
     .catch(err => console.log(err))
 };

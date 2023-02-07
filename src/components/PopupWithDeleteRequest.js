@@ -7,6 +7,7 @@ class PopupWithDeleteRequest extends Popup {
     this._buttonConfirm = this._popup.querySelector('.popup__button-yes');
     this._cardId = null;
     this._fnDelete = null;
+    this._defaultButtonText = 'Да';
   }
 
   setEventListeners() {
@@ -17,18 +18,17 @@ class PopupWithDeleteRequest extends Popup {
     });
     super.setEventListeners()
   }
-
-  close() {
-    super.close();
-    setTimeout(() => {
-      this._buttonConfirm.textContent = 'Да'
-    }, 200);
-  }
-
+ 
   open(cardId, fnDelete) {
     this._cardId = cardId;
     this._fnDelete = fnDelete;
     super.open()
+  }
+
+  setDefaultButtonText() {
+    setTimeout(() => {
+      this._buttonConfirm.textContent = this._defaultButtonText;
+    }, 200);
   }
 }
 

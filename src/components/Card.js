@@ -56,7 +56,6 @@ class Card {
       this._handleCardClick(this._value, this._url)
     });
     this._likeButton.addEventListener('click', () => {
-      this._changeVisualLike();
       this._handleLikeClick(this._cardId, card);
       this._likeState = !this._likeState;
     });
@@ -65,7 +64,7 @@ class Card {
     });
   };
 
-  _changeVisualLike() {
+  changeVisualLike() {
     this._likeButton.classList.toggle('element__like-btn_active');
   };
 
