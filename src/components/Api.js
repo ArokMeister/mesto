@@ -8,7 +8,7 @@ class Api {
 
   _verifyResponse(res) {
     if (!res.ok) {
-      return Promise.reject(`Ой! Ошибка: ${res.status}`)
+      return res.json().then(message => {throw new Error(message.message)})
     }
     return res.json();
   }

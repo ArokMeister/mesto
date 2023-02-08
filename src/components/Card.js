@@ -38,7 +38,7 @@ class Card {
     };
 
     if (this.getLikeState()) {
-      this._changeVisualLike()
+      this.changeVisualLike()
     };
 
     this._setEventListeners();

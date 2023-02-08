@@ -9,6 +9,7 @@ import { PopupWithForm } from '../components/PopupWithForm.js';
 import { UserInfo } from '../components/UserInfo.js';
 import { Api } from '../components/Api.js';
 import { PopupWithDeleteRequest } from '../components/PopupWithDeleteRequest.js';
+import { PopupWithError } from '../components/PopupWithError.js';
 
 // Popoup edit profile
 const popupProfileEditButton = document.querySelector('.profile__edit-btn');
@@ -30,7 +31,7 @@ Promise.all([
   userInfo.setUserInfo(res[0]);
   userInfo.setAvatar(res[0]);
   insertCard.renderItems(res[1]);
-}).catch(err => console.log(err));
+}).catch(err => popupWithError.open(err));
 
 function handleLikeClick(cardId, card) {
   const method = card.getLikeState() ? 'DELETE' : 'PUT';
@@ -39,7 +40,7 @@ function handleLikeClick(cardId, card) {
       card.setLikesCounter(res.likes.length);
       card.changeVisualLike();
     })
-    .catch(err => console.log(err))
+    .catch(err => {popupWithError.open(err); console.log(err)})
 };
 
 function handlePlaceFormSubmit(data) {
@@ -48,10 +49,8 @@ function handlePlaceFormSubmit(data) {
       insertCard.addItem(res);
       popupPlace.close();
     })
-    .catch(err => console.log(err))
-    .finally(() => {
-      popupPlace.setDefaultButtonText();
-    })
+    .catch(err => popupWithError.open(err))
+    .finally(() => popupPlace.setDefaultButtonText())
 };
 
 function handleSubmitDeleteRequest(cardId, fnDelete) {
@@ -60,10 +59,8 @@ function handleSubmitDeleteRequest(cardId, fnDelete) {
       fnDelete();
       popupWithQuestion.close();
     })
-    .catch(err => console.log(err))
-    .finally(() => {
-      popupWithQuestion.setDefaultButtonText();
-    })
+    .catch(err => popupWithError.open(err))
+    .finally(() => popupWithQuestion.setDefaultButtonText())
 };
 
 function handleProfileFormSubmit(data) {
@@ -72,10 +69,8 @@ function handleProfileFormSubmit(data) {
       userInfo.setUserInfo(res);
       popupProfile.close();
     })
-    .catch(err => console.log(err))
-    .finally(() => {
-      popupProfile.setDefaultButtonText();
-    })
+    .catch(err => popupWithError.open(err))
+    .finally(() => popupProfile.setDefaultButtonText())
 };
 
 function hadleSubmitAvatar(data) {
@@ -84,10 +79,8 @@ function hadleSubmitAvatar(data) {
       userInfo.setAvatar(res);
       avatarPopup.close()
     })
-    .catch(err => console.log(err))
-    .finally(() => {
-      avatarPopup.setDefaultButtonText();
-    })
+    .catch(err => popupWithError.open(err))
+    .finally(() => avatarPopup.setDefaultButtonText())
 };
 
 function handleCardClick(name, link) {
@@ -125,6 +118,9 @@ popupPlace.setEventListeners();
 
 const popupWithQuestion = new PopupWithDeleteRequest('.popup_remove', handleSubmitDeleteRequest);
 popupWithQuestion.setEventListeners();
+
+const popupWithError = new PopupWithError('.popup_error');
+popupWithError.setEventListeners();
 
 const popupView = new PopupWithImage('.popup_view');
 popupView.setEventListeners();
