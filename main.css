@@ -44,4 +44,9 @@
 .popup__container-remove{min-height:181px}
 .popup__button-yes{margin-top:0}
 .popup__title-remove{margin-bottom:38px}
+.popup__container-error{max-width:275px;min-height:80px;position:absolute;right:50px;top:50px}@media screen and (max-width:550px){.popup__container-error{right:15px;top:15px}}
+.popup__title-error{font-size:14px;font-weight:500;line-height:1.1;margin:10px;text-align:center}
+.popup__error-text{word-wrap:break-word;font-size:14px;font-weight:400;margin:10px;text-align:center}
+.popup__close-button-error{background-color:transparent;background-image:url(88e3bcdcb534d639e6b3.svg);background-position:50%;background-repeat:no-repeat;background-size:cover;border:none;cursor:pointer;min-height:15px;min-width:15px;padding:0;position:absolute;right:8px;top:8px}.popup__close-button:hover{opacity:.6;transition:.5s}
+.popup_error{background-color:transparent}
 
